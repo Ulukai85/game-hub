@@ -10,7 +10,7 @@ const ColorModeSwitch = () => {
       onCheckedChange={toggleColorMode}>
       <Switch.HiddenInput />
       <Switch.Control></Switch.Control>
-      <Switch.Label>Dark Mode</Switch.Label>
+      <Switch.Label whiteSpace='nowrap'>Dark Mode</Switch.Label>
     </Switch.Root>
   );
 };
