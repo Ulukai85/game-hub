@@ -1,4 +1,6 @@
 import useGenres from '@/hooks/useGenres';
+import getCroppedImageUrl from '@/services/image-url';
+import useGameQueryStore from '@/store';
 import {
   Button,
   Heading,
@@ -8,15 +10,10 @@ import {
   List,
   Spinner,
 } from '@chakra-ui/react';
-import getCroppedImageUrl from '@/services/image-url';
-import type { Genre } from '@/hooks/useGenres';
 
-interface Props {
-  onSelectGenre: (genre: Genre) => void;
-  selectedGenreId?: number;
-}
-
-const GenreList = ({ onSelectGenre, selectedGenreId }: Props) => {
+const GenreList = () => {
+  const selectedGenreId = useGameQueryStore((s) => s.gameQuery.genreId);
+  const setSelectedGenreId = useGameQueryStore((s) => s.setGenreId);
   const { data: genres, error, isLoading } = useGenres();
 
   if (error) return null;
@@ -28,7 +25,7 @@ const GenreList = ({ onSelectGenre, selectedGenreId }: Props) => {
         Genres
       </Heading>
       <List.Root>
-        {genres?.results.map((genre: Genre) => (
+        {genres?.results.map((genre) => (
           <List.Item key={genre.id} paddingY='4px' listStyle='none'>
             <HStack spaceX={-2} maxW='100%'>
               <Image
@@ -42,7 +39,7 @@ const GenreList = ({ onSelectGenre, selectedGenreId }: Props) => {
                 variant='ghost'
                 size='xs'
                 maxW='100%'
-                onClick={() => onSelectGenre(genre)}>
+                onClick={() => setSelectedGenreId(genre.id)}>
                 <Link
                   fontWeight={selectedGenreId === genre.id ? 'bold' : 'normal'}
                   fontSize='lg'
