@@ -1,5 +1,6 @@
 import usePlatform from '@/hooks/usePlatform';
-import usePlatforms, { type Platform } from '@/hooks/usePlatforms';
+import usePlatforms from '@/hooks/usePlatforms';
+import { type Platform } from '@/entities/Platform';
 import useGameQueryStore from '@/store';
 import { Button, Menu, Portal } from '@chakra-ui/react';
 import { BsChevronDown } from 'react-icons/bs';
